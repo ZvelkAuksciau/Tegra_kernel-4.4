@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#define DEBUG 1
+
 #include <media/camera_common.h>
 #include <linux/of_graph.h>
 #include <linux/string.h>
@@ -49,9 +52,9 @@ static const struct camera_common_colorfmt camera_common_color_fmts[] = {
 		V4L2_PIX_FMT_SBGGR10,
 	},
 	{
-		MEDIA_BUS_FMT_SRGGB8_1X8,
-		V4L2_COLORSPACE_SRGB,
-		V4L2_PIX_FMT_SRGGB8,
+		MEDIA_BUS_FMT_UYVY8_1X16,
+		V4L2_COLORSPACE_REC709,
+		V4L2_PIX_FMT_UYVY,
 	},
 	/*
 	 * The below two formats are not supported by VI4,
@@ -514,12 +517,14 @@ int camera_common_s_fmt(struct v4l2_subdev *sd, struct v4l2_mbus_framefmt *mf)
 	struct camera_common_data *s_data = to_camera_common_data(client);
 	int ret;
 
-	dev_dbg(&client->dev, "%s(%u) size %i x %i\n", __func__,
+	dev_dbg(&client->dev, "%s(%i) size %i x %i\n", __func__,
 			mf->code, mf->width, mf->height);
 
 	/* MIPI CSI could have changed the format, double-check */
-	if (!camera_common_find_datafmt(mf->code))
+	if (!camera_common_find_datafmt(mf->code)) {
+		dev_dbg(&client->dev, "%s failed to find FMT", __func__);
 		return -EINVAL;
+	}
 
 	ret = camera_common_try_fmt(sd, mf);
 

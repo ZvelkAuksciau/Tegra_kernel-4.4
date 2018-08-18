@@ -10,6 +10,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG 1
+
 #include <linux/export.h>
 #include <linux/kernel.h>
 #include <linux/of.h>

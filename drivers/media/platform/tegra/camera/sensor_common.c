@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#define DEBUG 1
+
 #include <media/sensor_common.h>
 #include <linux/of_graph.h>
 #include <linux/string.h>
@@ -111,6 +113,10 @@ static int extract_pixel_format(
 		*format = V4L2_PIX_FMT_XBGGR10P;
 	else if (strncmp(pixel_t, "bayer_xrggb10p", size) == 0)
 		*format = V4L2_PIX_FMT_XRGGB10P;
+	else if (strncmp(pixel_t, "uyvy", size) == 0)
+		*format = V4L2_PIX_FMT_UYVY;
+	else if (strncmp(pixel_t, "rgb888", size) == 0)
+		*format = V4L2_PIX_FMT_RGB24;
 	else {
 		pr_err("%s: Need to extend format%s\n", __func__, pixel_t);
 		return -EINVAL;

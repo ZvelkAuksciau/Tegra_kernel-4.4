@@ -16,6 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#define DEBUG 1
+
 #include <linux/list.h>
 #include <linux/debugfs.h>
 #include <linux/i2c.h>

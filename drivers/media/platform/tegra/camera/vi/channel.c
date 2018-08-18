@@ -10,6 +10,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG 1
+
 #include <linux/atomic.h>
 #include <linux/bitmap.h>
 #include <linux/clk.h>

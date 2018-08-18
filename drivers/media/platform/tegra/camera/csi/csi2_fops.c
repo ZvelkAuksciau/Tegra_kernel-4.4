@@ -10,6 +10,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG 1
+
 #include <linux/device.h>
 #include <linux/clk/tegra.h>
 #include "camera/csi/csi.h"
@@ -133,32 +135,32 @@ void tegra_csi_error_recover(struct tegra_csi_channel *chan,
 			int port_val = ((port_num >> 1) << 1);
 			struct tegra_csi_port *port_a =
 				&chan->ports[port_val];
-			struct tegra_csi_port *port_b =
-				&chan->ports[port_val+1];
+//			struct tegra_csi_port *port_b =
+//				&chan->ports[port_val+1];
 
 			tpg_write(port_a,
 				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_ENABLE);
-			tpg_write(port_b,
-				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_ENABLE);
+//			tpg_write(port_b,
+//				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_ENABLE);
 			cil_write(port_a,
 				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x1);
-			cil_write(port_b,
-				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x1);
+//			cil_write(port_b,
+//				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x1);
 			csi_write(chan, TEGRA_CSI_CSI_SW_STATUS_RESET, 0x1,
 					port_num >> 1);
 			/* sleep for clock cycles to drain the Rx FIFO */
 			usleep_range(10, 20);
 			cil_write(port_a,
 				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x0);
-			cil_write(port_b,
-				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x0);
+//			cil_write(port_b,
+//				TEGRA_CSI_CIL_SW_SENSOR_RESET, 0x0);
 			csi_write(chan,
 				TEGRA_CSI_CSI_SW_STATUS_RESET,
 				0x0, port_num >> 1);
 			tpg_write(port_a,
 				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_DISABLE);
-			tpg_write(port_b,
-				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_DISABLE);
+//			tpg_write(port_b,
+//				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_DISABLE);
 		} else {
 			tpg_write(port,
 				TEGRA_CSI_PATTERN_GENERATOR_CTRL, PG_ENABLE);

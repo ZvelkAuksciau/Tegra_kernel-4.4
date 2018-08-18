@@ -564,6 +564,16 @@ config VIDEO_OV5693
 
 	  To compile this driver as a module, choose M here: the module
 	  will be called ov5693.
+	  
+config VIDEO_KMTIFPGA
+	tristate "KMTI carrier FPGA mipi interface support"
+	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+	---help---
+	  This is Video4Linux2 senor-level driver for FPGA driven CSI
+	  interface.
+	  
+	  To compile this driver as a module, choose M here: the module
+	  will be called kmtifpga
 
 config VIDEO_IMX219
         tristate "IMX219 camera sensor support"

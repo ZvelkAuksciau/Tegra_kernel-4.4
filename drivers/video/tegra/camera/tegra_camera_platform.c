@@ -13,6 +13,8 @@
  * GNU General Public License for more details.
  *
  */
+#define DEBUG 1
+
 #include <linux/fs.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>

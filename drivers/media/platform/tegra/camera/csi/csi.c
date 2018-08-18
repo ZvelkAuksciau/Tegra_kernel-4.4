@@ -10,6 +10,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG 1
+
 #include <linux/clk.h>
 #include <linux/device.h>
 #include <linux/gpio/consumer.h>
